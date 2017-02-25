@@ -70,6 +70,17 @@ namespace LeetCode_2_AddTwoNumbers
             AssertResult(l1, l2, expected);
         }
 
+        [TestCategory("進位")]
+        [TestMethod]
+        public void L1_is_6_2_and_L2_is_8_should_return_4_3()
+        {
+            var l1 = CreateListNode(new int[] { 6, 2 });
+            var l2 = CreateListNode(new int[] { 8 });
+            var expected = CreateListNode(new int[] { 4, 3 });
+
+            AssertResult(l1, l2, expected);
+        }
+
         private ListNode CreateListNode(int[] nums)
         {
             if (nums.Length == 0)
