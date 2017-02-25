@@ -1,5 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using ExpectedObjects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace LeetCode_2_AddTwoNumbers
 {
@@ -24,6 +25,35 @@ namespace LeetCode_2_AddTwoNumbers
             var actual = new Solution().AddTwoNumbers(l1, l2);
 
             Assert.AreEqual(expected.val, actual.val);
+        }
+
+        [TestMethod]
+        public void Test_All_ListNode_is_2_3()
+        {
+            var node = new ListNode(2);
+            node.next = new ListNode(3);
+
+            var actual = node.All();
+            var expected = new List<int> { 2, 3 };
+            expected.ToExpectedObject().ShouldEqual(actual);
+        }
+
+        [Ignore]
+        [TestMethod]
+        public void L1_is_5_4_and_L2_is_3_2_should_return_val_is_8_6()
+        {
+            var l1 = new ListNode(5);
+            l1.next = new ListNode(4);
+
+            var l2 = new ListNode(3);
+            l2.next = new ListNode(2);
+
+            var expected = new ListNode(8);
+            expected.next = new ListNode(6);
+
+            var actual = new Solution().AddTwoNumbers(l1, l2);
+
+            //expected.All().ToExpectedObject().ShouldEqual(actual.All());
         }
     }
 
@@ -52,6 +82,17 @@ namespace LeetCode_2_AddTwoNumbers
         public ListNode(int x)
         {
             val = x;
+        }
+
+        public IEnumerable<int> All()
+        {
+            var result = new List<int> { this.val };
+            if (next != null)
+            {
+                result.AddRange(next.All());
+            }
+
+            return result;
         }
     }
 }
