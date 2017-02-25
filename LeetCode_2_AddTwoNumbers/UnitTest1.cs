@@ -1,6 +1,7 @@
 ﻿using ExpectedObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 
 namespace LeetCode_2_AddTwoNumbers
@@ -133,13 +134,22 @@ namespace LeetCode_2_AddTwoNumbers
             var l1HasNext = l1.next != null;
             var l2HasNext = l2.next != null;
 
+            var isNextSumLargerThan0 = false;
+
             if (l1HasNext || l2HasNext)
             {
                 var l1NextVal = l1HasNext ? l1.next.val : 0;
                 var l2NextVal = l2HasNext ? l2.next.val : 0;
                 var add1 = t.Item1;
-                var nextVal = l1NextVal + l2NextVal + add1; //if larger than 10...
+                var nextValSum = l1NextVal + l2NextVal + add1;
+                isNextSumLargerThan0 = nextValSum >= 10;
+                var nextVal = nextValSum >= 10 ? nextValSum - 10 : nextValSum;
                 result.next = new ListNode(nextVal);
+
+                if (isNextSumLargerThan0)
+                {
+                    result.next.next = new ListNode(1);
+                }
             }
 
             return result;
