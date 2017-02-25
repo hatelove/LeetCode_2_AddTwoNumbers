@@ -14,8 +14,16 @@ namespace LeetCode_2_AddTwoNumbers
         //Output: 7 -> 0 -> 8
 
         [TestMethod]
-        public void TestMethod1()
+        public void L1_is_1_and_L2_is_2_should_return_val_is_3()
         {
+            var l1 = new ListNode(1);
+            var l2 = new ListNode(2);
+
+            var expected = new ListNode(3);
+
+            var actual = new Solution().AddTwoNumbers(l1, l2);
+
+            Assert.AreEqual(expected.val, actual.val);
         }
     }
 
