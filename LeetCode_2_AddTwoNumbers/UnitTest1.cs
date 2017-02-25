@@ -32,6 +32,7 @@ namespace LeetCode_2_AddTwoNumbers
             expected.All().ToExpectedObject().ShouldEqual(actual.All());
         }
 
+        [TestCategory("長度1")]
         [TestMethod]
         public void Test_All_ListNode_is_2_3()
         {
@@ -43,6 +44,7 @@ namespace LeetCode_2_AddTwoNumbers
             expected.ToExpectedObject().ShouldEqual(actual);
         }
 
+        [TestCategory("長度2, 沒進位")]
         [TestMethod]
         public void L1_is_5_4_and_L2_is_3_2_should_return_val_is_8_6()
         {
@@ -74,7 +76,14 @@ namespace LeetCode_2_AddTwoNumbers
     {
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            return new ListNode(l1.val + l2.val);
+            var result = new ListNode(l1.val + l2.val);
+
+            if (l1.next != null && l2.next != null)
+            {
+                result.next = new ListNode(l1.next.val + l2.next.val);
+            }
+
+            return result;
         }
     }
 
