@@ -1,7 +1,6 @@
 ﻿using ExpectedObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 
 namespace LeetCode_2_AddTwoNumbers
@@ -128,25 +127,18 @@ namespace LeetCode_2_AddTwoNumbers
     {
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            Tuple<int, int> t = GetTwoDigits(l1, l2);
+            Tuple<int, int> t = GetTwoDigits(l1, l2, 0);
 
             var result = new ListNode(t.Item2);
             var l1HasNext = l1.next != null;
             var l2HasNext = l2.next != null;
 
-            var isNextSumLargerThan0 = false;
-
             if (l1HasNext || l2HasNext)
             {
-                var l1NextVal = l1HasNext ? l1.next.val : 0;
-                var l2NextVal = l2HasNext ? l2.next.val : 0;
-                var add1 = t.Item1;
-                var nextValSum = l1NextVal + l2NextVal + add1;
-                isNextSumLargerThan0 = nextValSum >= 10;
-                var nextVal = nextValSum >= 10 ? nextValSum - 10 : nextValSum;
-                result.next = new ListNode(nextVal);
+                var tNext = GetTwoDigits(l1.next, l2.next, t.Item1);
+                result.next = new ListNode(tNext.Item2);
 
-                if (isNextSumLargerThan0)
+                if (tNext.Item1 == 1)
                 {
                     result.next.next = new ListNode(1);
                 }
@@ -155,9 +147,12 @@ namespace LeetCode_2_AddTwoNumbers
             return result;
         }
 
-        private Tuple<int, int> GetTwoDigits(ListNode l1, ListNode l2)
+        private Tuple<int, int> GetTwoDigits(ListNode l1, ListNode l2, int num)
         {
-            var nodeVal = l1.val + l2.val;
+            var l1Val = l1 == null ? 0 : l1.val;
+            var l2Val = l2 == null ? 0 : l2.val;
+            var nodeVal = l1Val + l2Val + num;
+
             var item1 = nodeVal >= 10 ? 1 : 0;
             var item2 = nodeVal >= 10 ? nodeVal - 10 : nodeVal;
             return new Tuple<int, int>(item1, item2);
