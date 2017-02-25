@@ -40,7 +40,7 @@ namespace LeetCode_2_AddTwoNumbers
     {
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            throw new NotImplementedException();
+            return new ListNode(l1.val + l2.val);
         }
     }
 
