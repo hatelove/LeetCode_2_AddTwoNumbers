@@ -136,30 +136,35 @@ namespace LeetCode_2_AddTwoNumbers
     {
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            Tuple<int, int> t = GetTwoDigits(l1, l2, 0);
+            return CreateSumNode(l1, l2, 0);
+        }
 
-            var result = new ListNode(t.Item2);
-            var l1HasNext = l1.next != null;
-            var l2HasNext = l2.next != null;
+        private ListNode CreateSumNode(ListNode l1, ListNode l2, int num)
+        {
+            var t = GetTwoDigits(l1, l2, num);
+            var node = new ListNode(t.Item2);
 
-            if (l1HasNext || l2HasNext || t.Item1 == 1)
+            if (l1 == null && l2 == null)
             {
-                var tNext = GetTwoDigits(l1.next, l2.next, t.Item1);
-                result.next = new ListNode(tNext.Item2);
-
-                if (tNext.Item1 == 1)
+                if (num == 0)
                 {
-                    result.next.next = new ListNode(1);
+                    return null;
                 }
+
+                return node;
             }
 
-            return result;
+            var l1Next = l1?.next ?? null;
+            var l2Next = l2?.next ?? null;
+
+            node.next = CreateSumNode(l1Next, l2Next, t.Item1);
+            return node;
         }
 
         private Tuple<int, int> GetTwoDigits(ListNode l1, ListNode l2, int num)
         {
-            var l1Val = l1 == null ? 0 : l1.val;
-            var l2Val = l2 == null ? 0 : l2.val;
+            var l1Val = l1?.val ?? 0;
+            var l2Val = l2?.val ?? 0;
             var nodeVal = l1Val + l2Val + num;
 
             var item1 = nodeVal >= 10 ? 1 : 0;
