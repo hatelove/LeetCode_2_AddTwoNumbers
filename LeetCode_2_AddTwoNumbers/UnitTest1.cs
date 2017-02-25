@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using static LeetCode_2_AddTwoNumbers.ListNode;
 
 namespace LeetCode_2_AddTwoNumbers
 {
@@ -17,19 +18,20 @@ namespace LeetCode_2_AddTwoNumbers
         [TestMethod]
         public void L1_is_2_4_3_and_L2_is_5_6_4_should_return_7_0_8()
         {
-            var l1 = CreateListNode(new int[] {2, 4, 3});
-            var l2 = CreateListNode(new int[] {5, 6, 4});
-            var expected = CreateListNode(new int[] {7, 0, 8});
+            var l1 = CreateListNode(new int[] { 2, 4, 3 });
+            var l2 = CreateListNode(new int[] { 5, 6, 4 });
+            var expected = CreateListNode(new int[] { 7, 0, 8 });
 
             AssertResult(l1, l2, expected);
         }
+
         [TestMethod]
         public void L1_is_1_and_L2_is_2_should_return_val_is_3()
         {
-            var l1 = new ListNode(1);
-            var l2 = new ListNode(2);
+            var l1 = CreateListNode(1);
+            var l2 = CreateListNode(2);
 
-            var expected = new ListNode(3);
+            var expected = CreateListNode(3);
 
             AssertResult(l1, l2, expected);
         }
@@ -119,25 +121,6 @@ namespace LeetCode_2_AddTwoNumbers
             var expected = CreateListNode(new int[] { 3, 1 });
             AssertResult(l1, l2, expected);
         }
-
-        private ListNode CreateListNode(int[] nums)
-        {
-            if (nums.Length == 0)
-            {
-                return null;
-            }
-
-            var result = new ListNode(nums[0]);
-
-            var currentNode = result;
-            for (int i = 1; i < nums.Length; i++)
-            {
-                currentNode.next = new ListNode(nums[i]);
-                currentNode = currentNode.next;
-            }
-
-            return result;
-        }
     }
 
     public class Solution
@@ -186,9 +169,34 @@ namespace LeetCode_2_AddTwoNumbers
         public int val;
         public ListNode next;
 
+        //it should change public to private in action, but LeetCode need public constructor
         public ListNode(int x)
         {
             val = x;
+        }
+
+        public static ListNode CreateListNode(int num)
+        {
+            return new ListNode(num);
+        }
+
+        public static ListNode CreateListNode(int[] nums)
+        {
+            if (nums == null || nums.Length == 0)
+            {
+                throw new ArgumentException("nums");
+            }
+
+            var result = new ListNode(nums[0]);
+
+            var currentNode = result;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                currentNode.next = new ListNode(nums[i]);
+                currentNode = currentNode.next;
+            }
+
+            return result;
         }
 
         public IEnumerable<int> All()
