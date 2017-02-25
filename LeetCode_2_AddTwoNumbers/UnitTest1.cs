@@ -23,6 +23,11 @@ namespace LeetCode_2_AddTwoNumbers
 
             var expected = new ListNode(3);
 
+            AssertResult(l1, l2, expected);
+        }
+
+        private static void AssertResult(ListNode l1, ListNode l2, ListNode expected)
+        {
             var actual = new Solution().AddTwoNumbers(l1, l2);
 
             expected.All().ToExpectedObject().ShouldEqual(actual.All());
