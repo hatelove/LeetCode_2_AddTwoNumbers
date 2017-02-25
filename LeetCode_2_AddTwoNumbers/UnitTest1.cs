@@ -36,8 +36,7 @@ namespace LeetCode_2_AddTwoNumbers
         [TestMethod]
         public void Test_All_ListNode_is_2_3()
         {
-            var node = new ListNode(2);
-            node.next = new ListNode(3);
+            var node = CreateListNode(new int[] {2, 3});
 
             var actual = node.All();
             var expected = new List<int> { 2, 3 };
@@ -48,18 +47,34 @@ namespace LeetCode_2_AddTwoNumbers
         [TestMethod]
         public void L1_is_5_4_and_L2_is_3_2_should_return_val_is_8_6()
         {
-            var l1 = new ListNode(5);
-            l1.next = new ListNode(4);
+            var l1 = CreateListNode(new int[] { 5, 4 });
 
-            var l2 = new ListNode(3);
-            l2.next = new ListNode(2);
+            var l2 = CreateListNode(new int[] { 3, 2 });
 
-            var expected = new ListNode(8);
-            expected.next = new ListNode(6);
+            var expected = CreateListNode(new int[] { 8, 6 });
 
             var actual = new Solution().AddTwoNumbers(l1, l2);
 
             expected.All().ToExpectedObject().ShouldEqual(actual.All());
+        }
+
+        private ListNode CreateListNode(int[] nums)
+        {
+            if (nums.Length == 0)
+            {
+                return null;
+            }
+
+            var result = new ListNode(nums[0]);
+
+            var currentNode = result;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                currentNode.next = new ListNode(nums[i]);
+                currentNode = currentNode.next;
+            }
+
+            return result;
         }
     }
 
