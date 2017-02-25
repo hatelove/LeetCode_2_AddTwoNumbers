@@ -103,6 +103,15 @@ namespace LeetCode_2_AddTwoNumbers
             AssertResult(l1, l2, expected);
         }
 
+        [TestMethod]
+        public void L1_is_6_and_L2_is_7_should_return_3_1()
+        {
+            var l1 = CreateListNode(new int[] { 6 });
+            var l2 = CreateListNode(new int[] { 7 });
+            var expected = CreateListNode(new int[] { 3, 1 });
+            AssertResult(l1, l2, expected);
+        }
+
         private ListNode CreateListNode(int[] nums)
         {
             if (nums.Length == 0)
