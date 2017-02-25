@@ -105,15 +105,22 @@ namespace LeetCode_2_AddTwoNumbers
     {
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            var result = new ListNode(l1.val + l2.val);
+            var rootValBySum = l1.val + l2.val;
 
+            var add1Flag = rootValBySum >= 10;
+            var rootVal = rootValBySum >= 10 ? rootValBySum - 10 : rootValBySum;
+
+            var result = new ListNode(rootVal);
             var l1HasNext = l1.next != null;
             var l2HasNext = l2.next != null;
+
             if (l1HasNext || l2HasNext)
             {
                 var l1NextVal = l1HasNext ? l1.next.val : 0;
                 var l2NextVal = l2HasNext ? l2.next.val : 0;
-                result.next = new ListNode(l1NextVal + l2NextVal);
+                var add1 = add1Flag ? 1 : 0;
+                var nextVal = l1NextVal + l2NextVal + add1;
+                result.next = new ListNode(nextVal);
             }
 
             return result;
