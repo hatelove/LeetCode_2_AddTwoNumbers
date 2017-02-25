@@ -142,7 +142,7 @@ namespace LeetCode_2_AddTwoNumbers
             var l1HasNext = l1.next != null;
             var l2HasNext = l2.next != null;
 
-            if (l1HasNext || l2HasNext)
+            if (l1HasNext || l2HasNext || t.Item1 == 1)
             {
                 var tNext = GetTwoDigits(l1.next, l2.next, t.Item1);
                 result.next = new ListNode(tNext.Item2);
