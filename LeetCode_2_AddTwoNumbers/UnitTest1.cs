@@ -92,6 +92,17 @@ namespace LeetCode_2_AddTwoNumbers
             AssertResult(l1, l2, expected);
         }
 
+        [TestCategory("最末位進位")]
+        [TestMethod]
+        public void L1_is_6_7_and_L2_is_2_3_should_return_8_0_1()
+        {
+            var l1 = CreateListNode(new int[] { 6, 7 });
+            var l2 = CreateListNode(new int[] { 2, 3 });
+            var expected = CreateListNode(new int[] { 8, 0, 1 });
+
+            AssertResult(l1, l2, expected);
+        }
+
         private ListNode CreateListNode(int[] nums)
         {
             if (nums.Length == 0)
