@@ -14,7 +14,15 @@ namespace LeetCode_2_AddTwoNumbers
 
         //Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
         //Output: 7 -> 0 -> 8
+        [TestMethod]
+        public void L1_is_2_4_3_and_L2_is_5_6_4_should_return_7_0_8()
+        {
+            var l1 = CreateListNode(new int[] {2, 4, 3});
+            var l2 = CreateListNode(new int[] {5, 6, 4});
+            var expected = CreateListNode(new int[] {7, 0, 8});
 
+            AssertResult(l1, l2, expected);
+        }
         [TestMethod]
         public void L1_is_1_and_L2_is_2_should_return_val_is_3()
         {
