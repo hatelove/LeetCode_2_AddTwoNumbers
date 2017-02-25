@@ -1,5 +1,6 @@
 ﻿using ExpectedObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace LeetCode_2_AddTwoNumbers
@@ -105,12 +106,9 @@ namespace LeetCode_2_AddTwoNumbers
     {
         public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
-            var rootValBySum = l1.val + l2.val;
+            Tuple<int, int> t = GetTwoDigits(l1, l2);
 
-            var add1Flag = rootValBySum >= 10;
-            var rootVal = rootValBySum >= 10 ? rootValBySum - 10 : rootValBySum;
-
-            var result = new ListNode(rootVal);
+            var result = new ListNode(t.Item2);
             var l1HasNext = l1.next != null;
             var l2HasNext = l2.next != null;
 
@@ -118,12 +116,20 @@ namespace LeetCode_2_AddTwoNumbers
             {
                 var l1NextVal = l1HasNext ? l1.next.val : 0;
                 var l2NextVal = l2HasNext ? l2.next.val : 0;
-                var add1 = add1Flag ? 1 : 0;
-                var nextVal = l1NextVal + l2NextVal + add1;
+                var add1 = t.Item1;
+                var nextVal = l1NextVal + l2NextVal + add1; //if larger than 10...
                 result.next = new ListNode(nextVal);
             }
 
             return result;
+        }
+
+        private Tuple<int, int> GetTwoDigits(ListNode l1, ListNode l2)
+        {
+            var nodeVal = l1.val + l2.val;
+            var item1 = nodeVal >= 10 ? 1 : 0;
+            var item2 = nodeVal >= 10 ? nodeVal - 10 : nodeVal;
+            return new Tuple<int, int>(item1, item2);
         }
     }
 
