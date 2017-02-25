@@ -36,7 +36,7 @@ namespace LeetCode_2_AddTwoNumbers
         [TestMethod]
         public void Test_All_ListNode_is_2_3()
         {
-            var node = CreateListNode(new int[] {2, 3});
+            var node = CreateListNode(new int[] { 2, 3 });
 
             var actual = node.All();
             var expected = new List<int> { 2, 3 };
@@ -53,9 +53,7 @@ namespace LeetCode_2_AddTwoNumbers
 
             var expected = CreateListNode(new int[] { 8, 6 });
 
-            var actual = new Solution().AddTwoNumbers(l1, l2);
-
-            expected.All().ToExpectedObject().ShouldEqual(actual.All());
+            AssertResult(l1, l2, expected);
         }
 
         private ListNode CreateListNode(int[] nums)
@@ -77,15 +75,6 @@ namespace LeetCode_2_AddTwoNumbers
             return result;
         }
     }
-
-    /**
- * Definition for singly-linked list.
- * public class ListNode {
- *     public int val;
- *     public ListNode next;
- *     public ListNode(int x) { val = x; }
- * }
- */
 
     public class Solution
     {
