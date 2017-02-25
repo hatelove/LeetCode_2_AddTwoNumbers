@@ -32,7 +32,7 @@ namespace LeetCode_2_AddTwoNumbers
             expected.All().ToExpectedObject().ShouldEqual(actual.All());
         }
 
-        [TestCategory("長度1")]
+        [TestCategory("l1, l2 長度為1")]
         [TestMethod]
         public void Test_All_ListNode_is_2_3()
         {
@@ -43,7 +43,8 @@ namespace LeetCode_2_AddTwoNumbers
             expected.ToExpectedObject().ShouldEqual(actual);
         }
 
-        [TestCategory("長度2, 沒進位")]
+        [TestCategory("l1, l2 長度為2")]
+        [TestCategory("沒進位")]
         [TestMethod]
         public void L1_is_5_4_and_L2_is_3_2_should_return_val_is_8_6()
         {
@@ -52,6 +53,19 @@ namespace LeetCode_2_AddTwoNumbers
             var l2 = CreateListNode(new int[] { 3, 2 });
 
             var expected = CreateListNode(new int[] { 8, 6 });
+
+            AssertResult(l1, l2, expected);
+        }
+
+        [TestCategory("l1, l2 長度不同")]
+        [TestCategory("沒進位")]
+        [TestMethod]
+        public void L1_is_5_4_and_L2_is_3_should_return_8_4()
+        {
+            var l1 = CreateListNode(new int[] { 5, 4 });
+            var l2 = CreateListNode(new int[] { 3 });
+
+            var expected = CreateListNode(new int[] { 8, 4 });
 
             AssertResult(l1, l2, expected);
         }
@@ -82,9 +96,13 @@ namespace LeetCode_2_AddTwoNumbers
         {
             var result = new ListNode(l1.val + l2.val);
 
-            if (l1.next != null && l2.next != null)
+            var l1HasNext = l1.next != null;
+            var l2HasNext = l2.next != null;
+            if (l1HasNext || l2HasNext)
             {
-                result.next = new ListNode(l1.next.val + l2.next.val);
+                var l1NextVal = l1HasNext ? l1.next.val : 0;
+                var l2NextVal = l2HasNext ? l2.next.val : 0;
+                result.next = new ListNode(l1NextVal + l2NextVal);
             }
 
             return result;
