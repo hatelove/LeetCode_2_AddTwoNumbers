@@ -1,7 +1,6 @@
 ﻿using ExpectedObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace LeetCode_2_AddTwoNumbers
 {
@@ -44,7 +43,6 @@ namespace LeetCode_2_AddTwoNumbers
             expected.ToExpectedObject().ShouldEqual(actual);
         }
 
-        [Ignore]
         [TestMethod]
         public void L1_is_5_4_and_L2_is_3_2_should_return_val_is_8_6()
         {
@@ -59,7 +57,7 @@ namespace LeetCode_2_AddTwoNumbers
 
             var actual = new Solution().AddTwoNumbers(l1, l2);
 
-            //expected.All().ToExpectedObject().ShouldEqual(actual.All());
+            expected.All().ToExpectedObject().ShouldEqual(actual.All());
         }
     }
 
